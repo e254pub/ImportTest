@@ -11,9 +11,6 @@ services:
 
   nginx:
     image: nginx:1.21
-    environment:
-      WEB_DOMAIN: localhost
-      APP_NAME: php
     ports:
       - "80:80"
     volumes:
