@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./:/opt/ImportTest
+
+  nginx:
+    image: nginx:1.21
+    environment:
+      WEB_DOMAIN: localhost
+      APP_NAME: php
+    ports:
+      - "80:80"
+    volumes:
+      - .:/opt/ImportTest
+      - ./docker/nginx/:/etc/nginx/conf.d/
+
+  php:
+    build:
+      context: ./docker/php
+    volumes:
+      - ./:/opt/ImportTest

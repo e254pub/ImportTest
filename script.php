@@ -8,8 +8,8 @@ class Import
     public function connect()
     {
         $username = 'root';
-        $password = '';
-        return new PDO('mysql:host=localhost;dbname=directory_db', $username, $password);
+        $password = '123';
+        return new PDO('mysql:host=mysql;dbname=directory_db', $username, $password);
     }
 
     /**
@@ -37,9 +37,6 @@ class Import
                 $dbh->query($sql);
                 echo implode(',', $data) . "\n";
             }
-
-            header('Content-type: text/csv');
-            header("Content-disposition: attachment;filename=result.csv");
         }
     }
 
@@ -60,6 +57,9 @@ class Import
         return $needChars;
     }
 }
+
+header('Content-type: text/csv');
+header("Content-disposition: attachment;filename=result.csv");
 
 $startImport = new Import();
 $startImport->importFile($_POST['submit'], $_FILES['filename']['tmp_name']);
